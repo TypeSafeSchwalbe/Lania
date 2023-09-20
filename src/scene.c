@@ -111,7 +111,6 @@ void scene_render(Scene* scene, RenderBuffer* buffer) {
     for(size_t y = 0; y < scene->tiles_y; y += 1) {
         for(size_t x = 0; x < scene->tiles_x; x += 1) {
             SceneTileState* tile_state = scene_get_tile(scene, x, y);
-            const SceneTile* tile = scene->tiles[y][x];
             for(size_t e = 0; e < tile_state->entities.size; e += 1) {
                 Entity* entity = tile_state_get(tile_state, e);
                 int ox = rand() % SCENE_TILE_WIDTH;

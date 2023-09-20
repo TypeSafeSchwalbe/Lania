@@ -11,29 +11,23 @@
 
 # Progress
 
-- [ ] Engine
-    - [x] Vector
-    - [x] Rendering 
-    - [ ] Console
-        - [ ] Bug: Windows input is buggy (Enter needs to be pressed twice?)
-    - [x] Timing
-    - [x] Path Finding
+- [x] Engine
 - [x] Game Logic
 - [ ] Game Content
     - [x] Forest Region
     - [x] Desert Region
-    - [x] Enchanted Forest Region
+    - [ ] Enchanted Forest Region
         - [x] Concept
         - [x] Human Troop Type
         - [x] Goblin Troop Type
-        - [ ] 3 Stages
+        - [ ] Stages
             - [x] Enchanted Lake
-            - [ ] Village of the Elves
+            - [x] Elven Village
             - [ ] Shallow River Ford
         - [x] Commander
-    - [ ] Goblin Region
+    - [ ] Goblin? Region
         - [ ] Concept
         - [ ] Human Troop Type
         - [ ] Goblin Troop Type
-        - [ ] 3 Stages
+        - [ ] Stages
         - [ ] Commander

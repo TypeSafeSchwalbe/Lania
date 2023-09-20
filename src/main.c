@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -9,7 +8,7 @@
 #include "stages/stages.h"
 
 
-void end_turn(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) { 
+void end_turn(SaveGame* savegame, Scene* scene) { 
     char goblins_won = 0;
     for(size_t y = 0; y < scene->tiles_y && !goblins_won; y += 1) {
         for(size_t x = 0; x < scene->tiles_x && !goblins_won; x += 1) {
@@ -41,9 +40,23 @@ void end_turn(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
     }
 }
 
+const char* TURN_END_PROMPT = "Repeatedly press [T] to end your turn.";
+const unsigned char TURN_END_PRESS_COUNT = 3;
+
+void render_turn_end_prompt(unsigned char count) {
+    size_t prompt_length = strlen(TURN_END_PROMPT);
+    size_t prompt_width = console_width() - 1;
+    for(size_t c = 0; c < prompt_width; c += 1) {
+        if(c % (prompt_width / TURN_END_PRESS_COUNT) == 0) {
+            printf(c / (prompt_width / TURN_END_PRESS_COUNT) < count? S_WHITE_BG S_BLACK_FG : S_RESET);
+        }
+        putchar(c < prompt_length? TURN_END_PROMPT[c] : ' ');
+    }
+    fflush(stdout);
+}
+
 void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
-    const char* DONE_TEXT = "done";
-    unsigned char done_typed_i = 0;
+    unsigned char turn_end_press_count = 0;
     for(;;) {
         update_main_buffer_size(buffer);
         clear_buffer(buffer);
@@ -51,7 +64,7 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
         render_selected_tile(buffer, scene, scene->camera_tile_x, scene->camera_tile_y, S_WHITE_BG);
         console_clear();
         print_buffer(buffer);
-        printf("Type 'done' to end your turn. ");
+        render_turn_end_prompt(turn_end_press_count);
         int c = console_read_char();
         if(c == '\033') {
             console_read_char();
@@ -70,14 +83,14 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
             if(action == NULL) { continue; }
             (action->handler)(savegame, buffer, scene, scene->camera_tile_x, scene->camera_tile_y);
         }
-        if(c == DONE_TEXT[done_typed_i]) {
-            done_typed_i += 1;
-            if(done_typed_i >= strlen(DONE_TEXT)) {
-                end_turn(savegame, scene, buffer);
-                done_typed_i = 0;
+        if(c == 't') {
+            turn_end_press_count += 1;
+            if(turn_end_press_count >= TURN_END_PRESS_COUNT) {
+                end_turn(savegame, scene);
+                turn_end_press_count = 0;
             }
         } else {
-            done_typed_i = 0;
+            turn_end_press_count = 0;
         }
     }
 }

@@ -52,12 +52,28 @@ void write_line_onto_buffer(RenderBuffer* buffer, signed int dest_x, signed int 
 }
 
 void print_buffer(RenderBuffer* b) {
+    size_t printed_buffer_length = 0;
     for(unsigned short y = 0; y < b->height; y += 1) {
         for(unsigned short x = 0; x < b->width; x += 1) {
-            printf(b->char_data[b->width * y + x]);
+            printed_buffer_length += strlen(b->char_data[b->width * y + x]);
         }
-        printf("\n");
+        printed_buffer_length += 1;
     }
+    char* printed_buffer = malloc(sizeof(char) * (printed_buffer_length + 1));
+    char* printed_buffer_c = printed_buffer;
+    for(unsigned short y = 0; y < b->height; y += 1) {
+        for(unsigned short x = 0; x < b->width; x += 1) {
+            char* part = b->char_data[b->width * y + x];
+            size_t part_length = strlen(part);
+            memcpy(printed_buffer_c, part, part_length);
+            printed_buffer_c += part_length;
+        }
+        *printed_buffer_c = '\n';
+        printed_buffer_c += 1;
+    }
+    printed_buffer[printed_buffer_length] = '\0';
+    printf(printed_buffer);
+    free(printed_buffer);
 }
 
 void free_buffer(RenderBuffer* b) {

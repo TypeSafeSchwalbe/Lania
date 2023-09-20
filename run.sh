@@ -1,14 +1,9 @@
+#!/bin/bash -e
 
-mkdir debug > /dev/null 2>&1
+files=$(find src -name "*.c")
+flags="-Wall -Wextra -Wno-unused-parameter -Werror -lm -g"
 
-gcc -Wextra \
-        ./src/*.c \
-        ./src/engine/*.c \
-        ./src/stages/*.c \
-        ./src/stages/content/nature/*.c \
-        ./src/stages/content/humans/*.c \
-        ./src/stages/content/goblins/*.c \
-        ./src/stages/content/goblins/commanders/*.c \
-        ./src/actions/*.c \
-    -o debug/lania -lm -g &&
+mkdir debug -p
+gcc $files $flags -o debug/lania
+
 ./debug/lania

@@ -24,9 +24,9 @@ typedef struct Action {
     };
 
 
-DEF_ACTION(MOVE)
-DEF_ACTION(ATTACK)
-DEF_ACTION(INFO)
+DEF_ACTION(MOVE);
+DEF_ACTION(ATTACK);
+DEF_ACTION(INFO);
 
 
 extern const size_t ACTION_COUNT;

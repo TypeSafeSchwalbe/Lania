@@ -13,6 +13,7 @@ void console_clear() {
 #ifdef _WIN32
 
     #include <windows.h>
+    #include <fcntl.h>
 
     void console_init() {
         HANDLE in = GetStdHandle(STD_INPUT_HANDLE);
@@ -24,6 +25,7 @@ void console_clear() {
         GetConsoleMode(out, &mode);
         mode |= ENABLE_VIRTUAL_TERMINAL_PROCESSING;
         SetConsoleMode(out, mode);
+        _setmode(_fileno(stdin), _O_BINARY);
     }
 
     int console_width() {
@@ -48,6 +50,12 @@ void console_clear() {
             mode |= ENABLE_ECHO_INPUT | ENABLE_LINE_INPUT;
         }
         SetConsoleMode(in, mode);
+    }
+
+    int console_read_char() {
+        int c = fgetc(stdin);
+        if(c == '\r') { c = '\n'; }
+        return c;
     }
 
 #else
@@ -81,6 +89,10 @@ void console_clear() {
         tcsetattr(STDIN_FILENO, TCSAFLUSH, &t);
     }
 
+    int console_read_char() {
+        return fgetc(stdin);
+    }
+
 #endif
 
 
@@ -101,9 +113,4 @@ char* console_read_line() {
     content = realloc(content, ci + 1);
     content[ci] = '\0';
     return content;
-}
-
-int console_read_char() {
-    int c = fgetc(stdin);
-    return c == '\r'? '\n' : c;
 }

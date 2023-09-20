@@ -55,7 +55,7 @@ IMPL_ENTITY(SPEAR_GOBLIN, ((RenderObject) {
     1, // is enemy
     2, // health
     5, // attack strength
-    2, // attack size
+    1, // attack size
     1, // attack min distance
     4  // attack max distance
 );

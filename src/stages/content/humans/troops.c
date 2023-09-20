@@ -69,8 +69,8 @@ IMPL_ENTITY(DIGGER, ((RenderObject) {
     255, // speed
     0, // is enemy
     1, // health
-    5, // attack strength
-    1, // attack size
+    3, // attack strength
+    3, // attack size
     1, // attack min distance
     1  // attack max distance
 );

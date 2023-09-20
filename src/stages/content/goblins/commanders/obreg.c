@@ -35,19 +35,14 @@ IMPL_COMMANDER(OBREG, obreg, {
             char valid_tiles[scene->tiles_y * scene->tiles_x];
             for(unsigned int checked_y = 0; checked_y < scene->tiles_y; checked_y += 1) {
                 for(unsigned int checked_x = 0; checked_x < scene->tiles_x; checked_x += 1) {
-                    SceneTileState* checked_state = scene_get_tile(scene, checked_x, checked_y);
                     const SceneTile* checked_type = scene_get_tile_type(scene, checked_x, checked_y);
                     valid_tiles[checked_y * scene->tiles_x + checked_x] = troop_type->size * troop_count <= checked_type->capacity;
                 }
             }
-            unsigned int safe_x;
-            unsigned int safe_y;
             unsigned int safe_d = UINT_MAX;
             unsigned int* safe_s = NULL;
             for(unsigned int searched_y = 0; searched_y < scene->tiles_y; searched_y += 1) {
                 for(unsigned int searched_x = 0; searched_x < scene->tiles_x; searched_x += 1) {
-                    SceneTileState* tile = scene_get_tile(scene, searched_x, searched_y);
-                    char is_safe = 1;
                     if(tile_attackable_by_humans(scene, searched_x, searched_y)) { continue; }
                     unsigned int distance;
                     unsigned int* steps;
@@ -56,8 +51,6 @@ IMPL_COMMANDER(OBREG, obreg, {
                         free(steps);
                         continue;
                     }
-                    safe_x = searched_x;
-                    safe_y = searched_y;
                     safe_d = distance;
                     if(safe_s != NULL) { free(safe_s); }
                     safe_s = steps;
@@ -112,13 +105,10 @@ IMPL_COMMANDER(OBREG, obreg, {
             char valid_tiles[scene->tiles_y * scene->tiles_x];
             for(unsigned int checked_y = 0; checked_y < scene->tiles_y; checked_y += 1) {
                 for(unsigned int checked_x = 0; checked_x < scene->tiles_x; checked_x += 1) {
-                    SceneTileState* checked_state = scene_get_tile(scene, checked_x, checked_y);
                     const SceneTile* checked_type = scene_get_tile_type(scene, checked_x, checked_y);
                     valid_tiles[checked_y * scene->tiles_x + checked_x] = troop_type->size * troop_count <= checked_type->capacity;
                 }
             }
-            unsigned int humans_x;
-            unsigned int humans_y;
             unsigned int humans_d = UINT_MAX;
             unsigned int* humans_s = NULL;
             for(unsigned int searched_y = 0; searched_y < scene->tiles_y; searched_y += 1) {
@@ -132,8 +122,6 @@ IMPL_COMMANDER(OBREG, obreg, {
                         free(steps);
                         continue;
                     }
-                    humans_x = searched_x;
-                    humans_y = searched_y;
                     humans_d = distance;
                     if(humans_s != NULL) { free(humans_s); }
                     humans_s = steps;

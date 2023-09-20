@@ -47,6 +47,7 @@ void select_stage(SaveGame* savegame, Scene* scene) {
     
     console_clear();
     printf("\n%s\n\nContinue by pressing any key. ", STAGES[selected]->story);
+    fflush(stdout);
     console_read_char();
 }
 
@@ -65,6 +66,7 @@ void stage_end_screen(char winning_faction_is_enemy, SaveGame* savegame, Scene* 
         }
     }
     printf("Press any key to continue. ");
+    fflush(stdout);
     console_read_char();
     select_stage(savegame, scene);
 }
@@ -197,7 +199,7 @@ char select_tile_troop_count(RenderBuffer* buffer, Scene* scene, unsigned int ti
         signed int pos_x = tile_x * SCENE_TILE_WIDTH + scene->camera_ox;
         signed int pos_y = tile_y * SCENE_TILE_HEIGHT + scene->camera_oy;
         write_line_onto_buffer(buffer, pos_x + 2, pos_y + 1, S_WHITE_BG S_BLACK_FG, " + ", S_RESET, 3, SHRT_MAX);
-        FORMAT(displayed_number, displayed_number_length, " %u ", *selected_count);
+        FORMAT(displayed_number, displayed_number_length, " %lu ", *selected_count);
         write_line_onto_buffer(buffer, pos_x + 2, pos_y + 2, S_WHITE_BG S_BLACK_FG, displayed_number, S_RESET, displayed_number_length, SHRT_MAX);
         write_line_onto_buffer(buffer, pos_x + 2, pos_y + 3, S_WHITE_BG S_BLACK_FG, " - ", S_RESET, 3, SHRT_MAX);
         console_clear();
