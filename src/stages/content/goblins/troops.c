@@ -59,3 +59,21 @@ IMPL_ENTITY(SPEAR_GOBLIN, ((RenderObject) {
     1, // attack min distance
     4  // attack max distance
 );
+
+IMPL_ENTITY(DAGGER_GOBLIN, ((RenderObject) {
+    .data = (char**[]) {
+        (char*[]) { RF "o" C, NULL     },
+        (char*[]) { RF "#" C, RF "-" C }
+    },
+    .width = 2, .height = 2,
+    .anchor_x = 0, .anchor_y = 1
+}), "Dagger Goblin",
+    1, // size
+    255, // speed
+    1, // is enemy
+    1, // health
+    2, // attack strength
+    10, // attack size
+    1, // attack min distance
+    1  // attack max distance
+);

@@ -1,8 +1,5 @@
 
-#include <math.h>
-
 #include "../nature.h"
-#include "../humans.h"
 
 
 IMPL_TILE(DESERT, desert, {

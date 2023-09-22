@@ -32,8 +32,8 @@ IMPL_ENTITY(KNIGHT, ((RenderObject) {
     2, // speed
     0, // is enemy
     5, // health
-    5, // attack strength
-    1, // attack size
+    2, // attack strength
+    3, // attack size
     1, // attack min distance
     1  // attack max distance
 );
@@ -73,4 +73,23 @@ IMPL_ENTITY(DIGGER, ((RenderObject) {
     3, // attack size
     1, // attack min distance
     1  // attack max distance
+);
+
+IMPL_ENTITY(CATAPULT, ((RenderObject) {
+    .data = (char**[]) {
+        (char*[]) { "+",  "-",  "+",  "_",  "_",  "_", "_", "_", "/",  "\\", "_", NULL, NULL },
+        (char*[]) { "+",  "-",  "+",  NULL, NULL, "+", "o", "|", NULL, NULL, "|", "o",  "+"  },
+        (char*[]) { NULL, NULL, NULL, NULL, NULL, "+", "o", "-", "-",  "-",  "-", "o",  "+"  }
+    },
+    .width = 13, .height = 3,
+    .anchor_x = 6, .anchor_y = 2
+}), "Catapult",
+    25, // size
+    2, // speed
+    0, // is enemy
+    25, // health
+    25, // attack strength
+    25, // attack size
+    3, // attack min distance
+    20  // attack max distance
 );

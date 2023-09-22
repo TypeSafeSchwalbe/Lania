@@ -46,6 +46,6 @@ IMPL_OBJECT(FLOWER, Flower, flower, {
     render_object(buffer, &FLOWER, self->x + scene->camera_ox, self->y + scene->camera_oy);
 }, {}, (Scene* scene, int x, int y), {
     self.x = x;
-    self.y = y + 1;
+    self.y = y - 1;
     self.variant = rand() % FLOWER_VARIANT_COUNT;
 });
