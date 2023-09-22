@@ -25,7 +25,6 @@ IMPL_STAGE(ENCHANTED_LAKE, enchanted_lake, ((const SceneTile**[]) {
 }), 11, 11, COMMANDER_OBREG, {
     scene_focus_on_tile(&self, 1, 1);
 
-    stage_summon_troops(&self, 0, 1, &ENTITY_KNIGHT, 20);
     stage_summon_troops(&self, 1, 1, &ENTITY_DIGGER, 10);
     stage_summon_troops(&self, 2, 1, &ENTITY_ARCHER, 10);
 
@@ -35,5 +34,6 @@ IMPL_STAGE(ENCHANTED_LAKE, enchanted_lake, ((const SceneTile**[]) {
     stage_summon_troops(&self, 9, 4, &ENTITY_GOBLIN, 10);
     stage_summon_troops(&self, 9, 4, &ENTITY_CYCLOPS, 1);
 }, "Enchanted Lake",
-    "After you successfully took control of the disputed territory, you now entered the western side of the goblin realm."
+    "After you successfully took control of the disputed territory,\n"
+    "you now entered the western side of the goblin realm."
 );

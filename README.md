@@ -16,15 +16,7 @@
 - [ ] Game Content
     - [x] Forest Region
     - [x] Desert Region
-    - [ ] Enchanted Forest Region
-        - [x] Concept
-        - [x] Human Troop Type
-        - [x] Goblin Troop Type
-        - [ ] Stages
-            - [x] Enchanted Lake
-            - [x] Elven Village
-            - [ ] Shallow River Ford
-        - [x] Commander
+    - [x] Enchanted Forest Region
     - [ ] Goblin? Region
         - [ ] Concept
         - [ ] Human Troop Type

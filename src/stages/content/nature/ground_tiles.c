@@ -23,5 +23,9 @@ IMPL_TILE(CLIFF_DOWN_RIGHT, cliff_down_right, {
 }, 0);
 
 IMPL_TILE(WATER, water, {
-    scene_add_water(scene, pos_x, pos_y);
+    scene_add_water(scene, pos_x, pos_y, 1);
 }, 0);
+
+IMPL_TILE(FORD, ford, {
+    scene_add_water(scene, pos_x, pos_y, 0);
+}, 10);

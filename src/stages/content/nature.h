@@ -30,7 +30,7 @@ DEF_OBJECT(CLIFF_UP_LEFT, CliffUpLeft, cliff_up_left, { int x; int y; char*** cl
 DEF_OBJECT(CLIFF_UP_RIGHT, CliffUpRight, cliff_up_right, { int x; int y; char*** cliff_data_v; char** cliff_data_h; char* cliff_data_f; }, (Scene* scene, int x, int y));
 DEF_OBJECT(CLIFF_DOWN_LEFT, CliffDownLeft, cliff_down_left, { int x; int y; char*** cliff_data_v; char** cliff_data_h; char* cliff_data_f; }, (Scene* scene, int x, int y));
 DEF_OBJECT(CLIFF_DOWN_RIGHT, CliffDownRight, cliff_down_right, { int x; int y; char*** cliff_data_v; char** cliff_data_h; char* cliff_data_f; }, (Scene* scene, int x, int y));
-DEF_OBJECT(WATER, Water, water, { int x; int y; }, (Scene* scene, int x, int y));
+DEF_OBJECT(WATER, Water, water, { int x; int y; unsigned char is_deep; }, (Scene* scene, int x, int y, unsigned char is_deep));
 
 DEF_TILE(CLIFF_FULL);
 DEF_TILE(CLIFF_UP_LEFT);
@@ -38,6 +38,7 @@ DEF_TILE(CLIFF_UP_RIGHT);
 DEF_TILE(CLIFF_DOWN_LEFT);
 DEF_TILE(CLIFF_DOWN_RIGHT);
 DEF_TILE(WATER);
+DEF_TILE(FORD);
 
 // magical
 

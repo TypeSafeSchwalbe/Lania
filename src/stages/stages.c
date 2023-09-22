@@ -14,7 +14,7 @@ void stage_summon_troops(Scene* scene, size_t tile_x, size_t tile_y, const Entit
 }
 
 
-const size_t STAGE_COUNT = 8;
+const size_t STAGE_COUNT = 9;
 
 const Stage* STAGES[] = {
     &STAGE_BATTLE_OF_ABIL,
@@ -26,5 +26,6 @@ const Stage* STAGES[] = {
     &STAGE_ENDLESS_DESERT_PLAIN,
 
     &STAGE_ENCHANTED_LAKE,
-    &STAGE_ELVEN_VILLAGE
+    &STAGE_ELVEN_VILLAGE,
+    &STAGE_NARROW_RIVER_FORD
 };

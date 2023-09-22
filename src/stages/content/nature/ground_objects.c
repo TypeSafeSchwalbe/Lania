@@ -115,10 +115,11 @@ IMPL_OBJECT(CLIFF_DOWN_RIGHT, CliffDownRight, cliff_down_right, {
 IMPL_OBJECT(WATER, Water, water, {
     for(unsigned int y = 0; y < SCENE_TILE_HEIGHT; y += 1) {
         for(unsigned int x = 0; x < SCENE_TILE_WIDTH; x += 1) {
-            write_onto_buffer(buffer, self->x + x + scene->camera_ox, self->y + y + scene->camera_oy, (rand() % 3 == 0? BB DF "~" C : BB DF " " C), self->y + y + scene->camera_oy - 1);
+            write_onto_buffer(buffer, self->x + x + scene->camera_ox, self->y + y + scene->camera_oy, (self->is_deep && rand() % 3 == 0? BB DF "~" C : BB DF " " C), self->y + y + scene->camera_oy - 1);
         }
     }
-}, {}, (Scene* scene, int x, int y), {
+}, {}, (Scene* scene, int x, int y, unsigned char is_deep), {
     self.x = x;
     self.y = y;
+    self.is_deep = is_deep;
 });

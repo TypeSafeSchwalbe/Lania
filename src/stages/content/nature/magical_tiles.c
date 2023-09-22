@@ -38,7 +38,7 @@ IMPL_TILE(MAGICAL_MEADOW, magical_meadow, {
 }, 20);
 
 IMPL_TILE(MAGICAL_WATER, magical_water, {
-    scene_add_water(scene, pos_x, pos_y);
+    scene_add_water(scene, pos_x, pos_y, 1);
     if(rand() % 8 == 0) {
         int x = pos_x + rand() % SCENE_TILE_WIDTH;
         int y = pos_y + rand() % SCENE_TILE_HEIGHT;
