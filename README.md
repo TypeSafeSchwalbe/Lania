@@ -17,7 +17,8 @@
     - [x] Forest Region
     - [x] Desert Region
     - [ ] Enchanted Forest Region
-        - [ ] Rework stage "Elven Village"
+        - [x] Rework stage "Enchanted Lake"
+        - [x] Rework stage "Elven Village"
         - [ ] Rework stage "Narrow River Ford"
     - [ ] Badlands
         - [ ] Rework stage "Remote Oasis"
