@@ -1,6 +1,7 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 
 #include "scene.h"
 #include "engine/sequences.h"
@@ -42,7 +43,7 @@ void tile_state_remove(SceneTileState* tile, size_t index) {
 }
 
 
-Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, const Commander* enemy_commander) {
+Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander) {
     Scene new;
     new.stage_number = stage_number;
     new.tiles = tiles;
@@ -53,6 +54,7 @@ Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t til
     new.objects = vector_new(sizeof(SceneObject));
     new.camera_ox = 0;
     new.camera_oy = 0;
+    new.has_fog = has_fog;
     for(size_t y = 0; y < new.tiles_y; y += 1) {
         for(size_t x = 0; x < new.tiles_x; x += 1) {
             const SceneTile* tile = new.tiles[y][x];
@@ -100,13 +102,58 @@ SceneTileState* scene_get_tile(Scene* scene, size_t x, size_t y) {
 }
 
 const SceneTile* scene_get_tile_type(Scene* scene, size_t x, size_t y) {
-    return scene->tiles[y][x];
+    return scene->tiles[y][x];  
+}
+
+#define MIN(a, b) ((a) < (b)? (a) : (b))
+#define MAX(a, b) ((a) > (b)? (a) : (b))
+
+char scene_tile_has_fog(Scene* scene, size_t x, size_t y) {
+    if(!scene->has_fog) { return 0; }
+    for(unsigned int cy = 0; cy < scene->tiles_y; cy += 1) {
+        for(unsigned int cx = 0; cx < scene->tiles_x; cx += 1) {
+            SceneTileState* tile = scene_get_tile(scene, cx, cy);
+            unsigned short tile_max_visual_acuity = 0;
+            for(size_t e = 0; e < tile->entities.size; e += 1) {
+                const EntityType* entity = tile_state_get(tile, e)->type;
+                if(entity->visual_acuity < tile_max_visual_acuity) { continue; }
+                tile_max_visual_acuity = entity->visual_acuity;
+            }
+            unsigned int distance = (MAX(cx, x) - MIN(cx, x)) + (MAX(cy, y) - MIN(cy, y));
+            if(distance < tile_max_visual_acuity) { return 0; }
+        }
+    }
+    return 1;
+}
+
+#define FOG_GRADIENT_LENGTH_X 6.0
+#define FOG_GRADIENT_LENGTH_Y 3.0
+
+void render_fog(RenderBuffer* buffer, Scene* scene, unsigned int tile_x, unsigned int tile_y, char above_has_fog, char below_has_fog, char left_has_fog, char right_has_fog) {
+    for(unsigned int y = 0; y < SCENE_TILE_HEIGHT; y += 1) {
+        for(unsigned int x = 0; x < SCENE_TILE_WIDTH; x += 1) {
+            double density = 1.0;
+            if(!above_has_fog) { density = MIN(density, MIN((double) y / FOG_GRADIENT_LENGTH_Y, 1.0)); }
+            if(!below_has_fog) { density = MIN(density, MIN((double) (SCENE_TILE_HEIGHT - y) / FOG_GRADIENT_LENGTH_Y, 1.0)); }
+            if(!left_has_fog) { density = MIN(density, MIN((double) x / FOG_GRADIENT_LENGTH_X, 1.0)); }
+            if(!right_has_fog) { density = MIN(density, MIN((double) (SCENE_TILE_WIDTH - x) / FOG_GRADIENT_LENGTH_X, 1.0)); }
+            if((double) rand() / (double) RAND_MAX < density) {
+                write_onto_buffer(buffer, tile_x * SCENE_TILE_WIDTH + x + scene->camera_ox, tile_y * SCENE_TILE_HEIGHT + y + scene->camera_oy, " ", SHRT_MAX);
+            }
+        }
+    }
 }
 
 void scene_render(Scene* scene, RenderBuffer* buffer) {
     for(size_t i = 0; i < scene->objects.size; i += 1) {
         SceneObject* object = vector_get(&scene->objects, i);
         (object->type->render_h)(object->data, scene, buffer);
+    }
+    char tiles_have_fog[scene->tiles_y][scene->tiles_x];
+    for(size_t y = 0; y < scene->tiles_y; y += 1) {
+        for(size_t x = 0; x < scene->tiles_x; x += 1) {
+            tiles_have_fog[y][x] = scene_tile_has_fog(scene, x, y);
+        }
     }
     for(size_t y = 0; y < scene->tiles_y; y += 1) {
         for(size_t x = 0; x < scene->tiles_x; x += 1) {
@@ -117,6 +164,12 @@ void scene_render(Scene* scene, RenderBuffer* buffer) {
                 int oy = rand() % SCENE_TILE_HEIGHT;
                 render_object(buffer, entity->type->render_object, x * SCENE_TILE_WIDTH + ox + scene->camera_ox, y * SCENE_TILE_HEIGHT + oy + scene->camera_oy);
             }
+            if(tiles_have_fog[y][x]) { render_fog(buffer, scene, x, y,
+                y     > 0?              tiles_have_fog[y - 1][x] : 1,
+                y + 1 < scene->tiles_y? tiles_have_fog[y + 1][x] : 1,
+                x     > 0?              tiles_have_fog[y][x - 1] : 1,
+                x + 1 < scene->tiles_x? tiles_have_fog[y][x + 1] : 1
+            ); }
         }
     }
 }

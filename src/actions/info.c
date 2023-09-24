@@ -8,6 +8,7 @@
 
 
 IMPL_ACTION(INFO, info, "Information", {
+    if(scene_tile_has_fog(scene, tile_x, tile_y)) { return; }
     clear_buffer(buffer);
     scene_render(scene, buffer);
     signed int pos_x = tile_x * SCENE_TILE_WIDTH + scene->camera_ox;

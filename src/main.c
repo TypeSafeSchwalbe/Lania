@@ -57,6 +57,7 @@ void render_turn_end_prompt(unsigned char count) {
 
 void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
     unsigned char turn_end_press_count = 0;
+    unsigned short iterated_troop_index = 0;
     for(;;) {
         update_main_buffer_size(buffer);
         clear_buffer(buffer);
@@ -77,6 +78,21 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
                 case 'C': new_tile_x += 1; break;
             }
             scene_focus_on_tile(scene, new_tile_x, new_tile_y);
+        }
+        if(c == '\t') {
+            unsigned short current = 0;
+            for(unsigned int y = 0; y < scene->tiles_y; y += 1) {
+                for(unsigned int x = 0; x < scene->tiles_x; x += 1) {
+                    SceneTileState* tile = scene_get_tile(scene, x, y);
+                    if(tile->entities.size == 0 || tile_state_get(tile, 0)->type->is_enemy) { continue; }
+                    if(current == iterated_troop_index) {
+                        scene_focus_on_tile(scene, x, y);
+                    }
+                    current += 1;
+                }
+            }
+            iterated_troop_index += 1;
+            iterated_troop_index %= current;
         }
         if(c == '\n') {
             const Action* action = select_tile_action(buffer, scene, scene->camera_tile_x, scene->camera_tile_y);

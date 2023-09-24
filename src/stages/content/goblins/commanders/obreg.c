@@ -24,6 +24,8 @@ char tile_attackable_by_humans(Scene* scene, unsigned int x, unsigned int y) {
 }
 
 
+#define MAX_HUMAN_TARGET_DISTANCE 7
+
 IMPL_COMMANDER(OBREG, obreg, {
     SceneTileState* tile = scene_get_tile(scene, x, y);
     const EntityType* troop_type;
@@ -31,7 +33,7 @@ IMPL_COMMANDER(OBREG, obreg, {
     while(gti_next(&gti)) {
         if(tile_state_did_action(tile, troop_type)) { continue; }
         size_t troop_count = tile_state_type_count(tile, troop_type);
-        {
+        if(tile_attackable_by_humans(scene, x, y)) {
             char valid_tiles[scene->tiles_y * scene->tiles_x];
             for(unsigned int checked_y = 0; checked_y < scene->tiles_y; checked_y += 1) {
                 for(unsigned int checked_x = 0; checked_x < scene->tiles_x; checked_x += 1) {
@@ -118,7 +120,7 @@ IMPL_COMMANDER(OBREG, obreg, {
                     unsigned int distance;
                     unsigned int* steps;
                     if(!find_path(valid_tiles, scene->tiles_x, scene->tiles_y, x, y, searched_x, searched_y, &steps, &distance)) { continue; }
-                    if(distance >= humans_d) {
+                    if(distance >= humans_d || distance > MAX_HUMAN_TARGET_DISTANCE) {
                         free(steps);
                         continue;
                     }

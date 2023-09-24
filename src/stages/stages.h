@@ -14,13 +14,17 @@ typedef struct Stage {
 } Stage;
 
 
+#define FOG_DISABLED 0
+#define FOG_ENABLED 1
+
+
 #define DEF_STAGE(code_name) \
     extern const Stage STAGE_##code_name;
 
-#define IMPL_STAGE(code_name, code_name_lower, tiles, tiles_x, tiles_y, commander, generator_body, displayed_name, displayed_story) \
+#define IMPL_STAGE(code_name, code_name_lower, tiles, tiles_x, tiles_y, has_fog, commander, generator_body, displayed_name, displayed_story) \
     const SceneTile*** STAGE_##code_name##_TILES = tiles; \
     Scene stage_##code_name_lower##_generate(unsigned long stage_number) { \
-        Scene self = scene_new(stage_number, STAGE_##code_name##_TILES, tiles_x, tiles_y, &commander); \
+        Scene self = scene_new(stage_number, STAGE_##code_name##_TILES, tiles_x, tiles_y, has_fog, &commander); \
         generator_body; \
         return self; \
     } \

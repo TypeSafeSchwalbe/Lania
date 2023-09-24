@@ -36,7 +36,7 @@ IMPL_STAGE(REMOTE_OASIS, remote_oasis, ((const SceneTile**[]) {
     (const SceneTile*[]) { BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, MDOW, FRST, FRST, DFST, FRST, FRST, MDOW, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD },
     (const SceneTile*[]) { BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, MDOW, FRST, DFST, DFST, WATR, FRST, MDOW, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD },
     (const SceneTile*[]) { BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, FRST, DFST, WATR, WATR, FRST, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD, BDLD }
-}), 21, 21, COMMANDER_DUREG, {
+}), 21, 21, FOG_DISABLED, COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 2, 11);
 
     stage_summon_troops(&self, 2, 11, &ENTITY_CATAPULT, 1);
@@ -49,7 +49,7 @@ IMPL_STAGE(REMOTE_OASIS, remote_oasis, ((const SceneTile**[]) {
     stage_summon_troops(&self, 18, 16, &ENTITY_SPEAR_GOBLIN, 25);
     stage_summon_troops(&self, 19, 16, &ENTITY_GOBLIN, 50);
 
-}, "Remote Oasis",
+}, "Remote Oasis <!Rework planned!>",
     "Time to give the goblins a taste of their own medicine.\n"
     "Enter the central region of the goblin realm and\n"
     "take over the oasis west of the capital."

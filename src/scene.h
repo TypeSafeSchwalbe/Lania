@@ -29,6 +29,7 @@ typedef struct EntityType {
     unsigned short attack_size; // total capacity that may be attacked with one hit
     unsigned char attack_min_distance;
     unsigned char attack_max_distance;
+    unsigned char visual_acuity; // tiles the entity can see away (= radius)
 } EntityType;
 
 typedef struct Entity {
@@ -65,6 +66,7 @@ typedef struct Scene {
     SceneTileState* tile_states;
     size_t tiles_x;
     size_t tiles_y;
+    unsigned char has_fog;
     const Commander* enemy_commander;
     Vector objects;
     signed int camera_ox;
@@ -88,7 +90,7 @@ typedef struct SceneObject {
     void* data;
 } SceneObject;
 
-Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, const Commander* enemy_commander);
+Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander);
 
 void scene_focus_on_tile(Scene* scene, signed int tile_x, signed int tile_y);
 
@@ -99,6 +101,8 @@ void* scene_get(Scene* scene, size_t index);
 SceneTileState* scene_get_tile(Scene* scene, size_t x, size_t y);
 
 const SceneTile* scene_get_tile_type(Scene* scene, size_t x, size_t y);
+
+char scene_tile_has_fog(Scene* scene, size_t x, size_t y);
 
 void scene_render(Scene* scene, RenderBuffer* buffer);
 

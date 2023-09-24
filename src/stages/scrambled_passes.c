@@ -27,7 +27,7 @@ IMPL_STAGE(SCRAMBLED_PASSES, scrambled_passes, ((const SceneTile**[]) {
     (const SceneTile*[]) { MDOW, MDOW, FRST, CLFF, CLUR, DSRT, DSRT, CLDL, CLFF, CLDR, DSRT },
     (const SceneTile*[]) { FRST, MDOW, MDOW, MDOW, MDOW, DSRT, CLDL, CLFF, CLFF, CLFF, DSRT },
     (const SceneTile*[]) { CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, DSRT }
-}), 11, 11, COMMANDER_DUREG, {
+}), 11, 11, FOG_DISABLED, COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 1, 1);
     stage_summon_troops(&self, 0, 1, &ENTITY_ARCHER, 5);
     stage_summon_troops(&self, 0, 1, &ENTITY_KNIGHT, 5);

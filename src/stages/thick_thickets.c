@@ -24,7 +24,7 @@ IMPL_STAGE(THICK_THICKETS, thick_thickets, ((const SceneTile**[]) {
     (const SceneTile*[]) { VFLD, VFLD, VFLD, MDOW, DFST, MDOW, MDOW, MDOW, MDOW },
     (const SceneTile*[]) { MDOW, MDOW, MDOW, MDOW, DFST, MDOW, MDOW, MDOW, VPLR },
     (const SceneTile*[]) { VPLR, MDOW, MDOW, MDOW, DFST, MDOW, MDOW, MDOW, MDOW },
-}), 9, 9, COMMANDER_AGREG, {
+}), 9, 9, FOG_DISABLED, COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 4, 4);
     stage_summon_troops(&self, 0, 8, &ENTITY_KNIGHT, 5);
     stage_summon_troops(&self, 8, 7, &ENTITY_KNIGHT, 5);

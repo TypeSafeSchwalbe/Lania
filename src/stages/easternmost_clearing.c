@@ -20,7 +20,7 @@ IMPL_STAGE(EASTERNMOST_CLEARING, easternmost_clearing, ((const SceneTile**[]) {
     (const SceneTile*[]) { DFST, MDOW, MDOW, MDOW, MDOW, MDOW, DFST },
     (const SceneTile*[]) { DFST, FRST, MDOW, MDOW, MDOW, FRST, DFST },
     (const SceneTile*[]) { DFST, DFST, DFST, DFST, DFST, DFST, DFST }
-}), 7, 7, COMMANDER_AGREG, {
+}), 7, 7, FOG_DISABLED, COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 0, 3);
     stage_summon_troops(&self, 0, 3, &ENTITY_KNIGHT, 10);
     stage_summon_troops(&self, 5, 2, &ENTITY_GOBLIN, 5);

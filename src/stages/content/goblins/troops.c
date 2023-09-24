@@ -18,7 +18,8 @@ IMPL_ENTITY(GOBLIN, ((RenderObject) {
     5, // attack strength
     1, // attack size
     1, // attack min distance
-    1  // attack max distance
+    1, // attack max distance
+    0  // visibility distance
 );
 
 IMPL_ENTITY(CYCLOPS, ((RenderObject) {
@@ -39,7 +40,8 @@ IMPL_ENTITY(CYCLOPS, ((RenderObject) {
     10, // attack strength
     10, // attack size
     1, // attack min distance
-    1  // attack max distance
+    1, // attack max distance
+    0  // visibility distance
 );
 
 IMPL_ENTITY(SPEAR_GOBLIN, ((RenderObject) {
@@ -57,7 +59,8 @@ IMPL_ENTITY(SPEAR_GOBLIN, ((RenderObject) {
     5, // attack strength
     1, // attack size
     1, // attack min distance
-    4  // attack max distance
+    4, // attack max distance
+    0  // visibility distance
 );
 
 IMPL_ENTITY(DAGGER_GOBLIN, ((RenderObject) {
@@ -75,5 +78,6 @@ IMPL_ENTITY(DAGGER_GOBLIN, ((RenderObject) {
     2, // attack strength
     10, // attack size
     1, // attack min distance
-    1  // attack max distance
+    1, // attack max distance
+    0  // visibility distance
 );

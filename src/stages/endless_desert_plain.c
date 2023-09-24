@@ -28,7 +28,7 @@ IMPL_STAGE(ENDLESS_DESERT_PLAIN, endless_desert_plain, ((const SceneTile**[]) {
     (const SceneTile*[]) { DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT },
     (const SceneTile*[]) { DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT },
     (const SceneTile*[]) { DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT }
-}), 20, 20, COMMANDER_DUREG, {
+}), 20, 20, FOG_DISABLED, COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 2, 2);
 
     stage_summon_troops(&self, 2, 2, &ENTITY_ARCHER, 15);

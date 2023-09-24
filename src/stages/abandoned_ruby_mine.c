@@ -25,7 +25,7 @@ IMPL_STAGE(ABANDONED_RUBY_MINE, abandoned_ruby_mine, ((const SceneTile**[]) {
     (const SceneTile*[]) { DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT },
     (const SceneTile*[]) { CLDR, DSRT, DSRT, DSRT, DSRT, CLDL, CLFF, CLFF, CLFF, CLFF, CLFF },
     (const SceneTile*[]) { CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF }
-}), 11, 11, COMMANDER_DUREG, {
+}), 11, 11, FOG_DISABLED, COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 1, 1);
 
     stage_summon_troops(&self, 0, 1, &ENTITY_KNIGHT, 10);

@@ -25,7 +25,7 @@ IMPL_STAGE(BATTLE_OF_ABIL, battle_of_abil, ((const SceneTile**[]) {
     (const SceneTile*[]) { DFST, FRST, VFLD, VPTB, FRST, VPTB, DFST },
     (const SceneTile*[]) { DFST, VHUT, VFLD, VPTR, VPLR, VPTL, DFST },
     (const SceneTile*[]) { DFST, DFST, DFST, DFST, DFST, DFST, DFST }
-}), 7, 7, COMMANDER_AGREG, {
+}), 7, 7, FOG_DISABLED, COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 1, 3);
     stage_summon_troops(&self, 1, 3, &ENTITY_FARMER, 10);
     stage_summon_troops(&self, 6, 3, &ENTITY_GOBLIN, 10);

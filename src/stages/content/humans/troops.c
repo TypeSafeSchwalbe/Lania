@@ -17,7 +17,8 @@ IMPL_ENTITY(FARMER, ((RenderObject) {
     5, // attack strength
     1, // attack size
     1, // attack min distance
-    1  // attack max distance
+    1, // attack max distance
+    2+1  // visibility distance
 );
 
 IMPL_ENTITY(KNIGHT, ((RenderObject) {
@@ -35,7 +36,8 @@ IMPL_ENTITY(KNIGHT, ((RenderObject) {
     2, // attack strength
     3, // attack size
     1, // attack min distance
-    1  // attack max distance
+    1, // attack max distance
+    2+1  // visibility distance
 );
 
 IMPL_ENTITY(ARCHER, ((RenderObject) {
@@ -47,32 +49,33 @@ IMPL_ENTITY(ARCHER, ((RenderObject) {
     .anchor_x = 0, .anchor_y = 1
 }), "Archer",
     2, // size
-    1, // speed
+    2, // speed
     0, // is enemy
     1, // health
     3, // attack strength
     3, // attack size
     3, // attack min distance
-    6  // attack max distance
+    6, // attack max distance
+    4+1  // visibility distance
 );
 
-IMPL_ENTITY(DIGGER, ((RenderObject) {
+IMPL_ENTITY(SCOUT, ((RenderObject) {
     .data = (char**[]) {
-        (char*[]) { NULL, "_" },
-        (char*[]) { "o",  "U" },
-        (char*[]) { "#",  "|" }
+        (char*[]) { "o", "=", NULL  },
+        (char*[]) { "#", "[", "]"   }
     },
-    .width = 2, .height = 3,
-    .anchor_x = 0, .anchor_y = 2
-}), "Digger",
-    2, // size
-    255, // speed
+    .width = 3, .height = 2,
+    .anchor_x = 0, .anchor_y = 1
+}), "Scout",
+    1, // size
+    5, // speed
     0, // is enemy
     1, // health
-    3, // attack strength
-    3, // attack size
-    1, // attack min distance
-    1  // attack max distance
+    0, // attack strength
+    0, // attack size
+    0, // attack min distance
+    0, // attack max distance
+    6+1  // visibility distance
 );
 
 IMPL_ENTITY(CATAPULT, ((RenderObject) {
@@ -91,5 +94,6 @@ IMPL_ENTITY(CATAPULT, ((RenderObject) {
     25, // attack strength
     25, // attack size
     3, // attack min distance
-    20  // attack max distance
+    20, // attack max distance
+    1  // visibility distance
 );

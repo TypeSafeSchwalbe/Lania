@@ -53,7 +53,7 @@
 #define DEF_ENTITY(entity_name) \
     extern const EntityType ENTITY_##entity_name;
 
-#define IMPL_ENTITY(entity_name, render_obj, p_name, p_size, p_speed, p_is_enemy, p_health, p_attack_strength, p_attack_size, p_attack_min_distance, p_attack_max_distance) \
+#define IMPL_ENTITY(entity_name, render_obj, p_name, p_size, p_speed, p_is_enemy, p_health, p_attack_strength, p_attack_size, p_attack_min_distance, p_attack_max_distance, p_visual_acuity) \
     const RenderObject ENTITY_##entity_name##_RENDER_OBJECT = render_obj; \
     const EntityType ENTITY_##entity_name = { \
         .render_object = &ENTITY_##entity_name##_RENDER_OBJECT, \
@@ -65,7 +65,8 @@
         .attack_strength = p_attack_strength, \
         .attack_size = p_attack_size, \
         .attack_min_distance = p_attack_min_distance, \
-        .attack_max_distance = p_attack_max_distance \
+        .attack_max_distance = p_attack_max_distance, \
+        .visual_acuity = p_visual_acuity \
     };
     
 
