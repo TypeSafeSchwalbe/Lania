@@ -63,6 +63,20 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
         clear_buffer(buffer);
         scene_render(scene, buffer);
         render_selected_tile(buffer, scene, scene->camera_tile_x, scene->camera_tile_y, S_WHITE_BG);
+        for(size_t y = 0; y < scene->tiles_y; y += 1) {
+            for(size_t x = 0; x < scene->tiles_x; x += 1) {
+                SceneTileState* tile = scene_get_tile(scene, x, y);
+                if(tile->entities.size == 0 || tile_state_get(tile, 0)->type->is_enemy) { continue; }
+                char all_did_actions = 1;
+                for(size_t e = 0; e < tile->entities.size; e += 1) {
+                    if(tile_state_get(tile, e)->did_action) { continue; }
+                    all_did_actions = 0;
+                    break;
+                }
+                if(all_did_actions) { continue; }
+                render_selected_tile(buffer, scene, x, y, S_GREEN_BG);
+            }
+        }
         console_clear();
         print_buffer(buffer);
         render_turn_end_prompt(turn_end_press_count);

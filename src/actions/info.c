@@ -37,12 +37,11 @@ IMPL_ACTION(INFO, info, "Information", {
         unsigned int count = 1;
         vector_push(&troop_counts, &count);
     }
-    write_line_onto_buffer(buffer, pos_x + 2, pos_y + 4, S_WHITE_BG S_BLACK_FG, "Troops:", S_RESET, 7, SHRT_MAX);
     for(size_t t = 0; t < troop_types.size; t += 1) {
         const EntityType** type = vector_get(&troop_types, t);
         unsigned int* count = vector_get(&troop_counts, t);
         FORMAT(troop_info, troop_info_length, "%u * %s", *count, (*type)->name);
-        write_line_onto_buffer(buffer, pos_x + 2, pos_y + 5 + t, S_WHITE_BG S_BLACK_FG, troop_info, S_RESET, troop_info_length, SHRT_MAX);
+        write_line_onto_buffer(buffer, pos_x + 2, pos_y + 4 + t, S_WHITE_BG S_BLACK_FG, troop_info, S_RESET, troop_info_length, SHRT_MAX);
     }
     vector_free(&troop_types);
     vector_free(&troop_counts);

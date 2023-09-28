@@ -8,18 +8,17 @@
 ![Battle of Abil](./screenshots/battle_of_abil.png)
 ![Endless Desert](./screenshots/endless_desert.png)
 ![Enchanted Lake](./screenshots/enchanted_lake.png)
+![Narrow River Fords](./screenshots/narrow_river_fords.png)
 
 # Progress
 
 - [x] Engine
 - [x] Game Logic
 - [ ] Game Content
+    - [ ] Tutorial
     - [x] Forest Region
     - [x] Desert Region
-    - [ ] Enchanted Forest Region
-        - [x] Rework stage "Enchanted Lake"
-        - [x] Rework stage "Elven Village"
-        - [ ] Rework stage "Narrow River Ford"
+    - [x] Enchanted Forest Region
     - [ ] Badlands
         - [ ] Rework stage "Remote Oasis"
         - [ ] Suburban Defenses
