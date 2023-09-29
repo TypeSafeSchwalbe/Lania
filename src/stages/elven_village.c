@@ -33,7 +33,7 @@ IMPL_STAGE(ELVEN_VILLAGE, elven_village, ((const SceneTile**[]) {
     (const SceneTile*[]) { MFST, MWTR, MWTR, MFST, EVHT, MFST, MWTR, MWTR, MWTR, MFST, EVHT, MFST, EVHT, MFST, EVHT, EVHT, MFST, MWTR, MWTR, MFST },
     (const SceneTile*[]) { MFST, MFST, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MWTR, MFST, MFST },
     (const SceneTile*[]) { MFST, MFST, MFST, MWTR, MWTR, MFST, MFST, MFST, MFST, MFST, MWTR, MWTR, MWTR, MWTR, MFST, MFST, MFST, MFST, MFST, MFST }
-}), 20, 20, FOG_ENABLED, COMMANDER_OBREG, {
+}), 20, 20, FOG_ENABLED, &COMMANDER_OBREG, {
     scene_focus_on_tile(&self, 1, 9);
 
     stage_summon_troops(&self, 0, 9, &ENTITY_ARCHER, 10);
@@ -65,6 +65,11 @@ IMPL_STAGE(ELVEN_VILLAGE, elven_village, ((const SceneTile**[]) {
 
     stage_summon_troops(&self, 14, 15, &ENTITY_GOBLIN, 10);
     stage_summon_troops(&self, 15, 16, &ENTITY_SPEAR_GOBLIN, 10);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Elven Village",
     "Continue the counter-invasion of the goblin realm by\n"
     "taking control of the elven village in the west of the goblin realm."

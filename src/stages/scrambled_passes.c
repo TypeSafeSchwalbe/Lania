@@ -27,7 +27,7 @@ IMPL_STAGE(SCRAMBLED_PASSES, scrambled_passes, ((const SceneTile**[]) {
     (const SceneTile*[]) { MDOW, MDOW, FRST, CLFF, CLUR, DSRT, DSRT, CLDL, CLFF, CLDR, DSRT },
     (const SceneTile*[]) { FRST, MDOW, MDOW, MDOW, MDOW, DSRT, CLDL, CLFF, CLFF, CLFF, DSRT },
     (const SceneTile*[]) { CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, DSRT }
-}), 11, 11, FOG_DISABLED, COMMANDER_DUREG, {
+}), 11, 11, FOG_DISABLED, &COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 1, 1);
     stage_summon_troops(&self, 0, 1, &ENTITY_ARCHER, 5);
     stage_summon_troops(&self, 0, 1, &ENTITY_KNIGHT, 5);
@@ -40,6 +40,11 @@ IMPL_STAGE(SCRAMBLED_PASSES, scrambled_passes, ((const SceneTile**[]) {
     stage_summon_troops(&self, 9, 7, &ENTITY_CYCLOPS, 1);
     stage_summon_troops(&self, 9, 7, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 8, 7, &ENTITY_GOBLIN, 5);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Scrambled Passes",
     "Now that the goblins have been pushed away into the mountains\n"
     "that separate the eastern forest in the human realm from the desert in the disputed territory,\n"

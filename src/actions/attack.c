@@ -46,16 +46,4 @@ IMPL_ACTION(ATTACK, attack, "Attack", {
     if(!select_destination_tile(buffer, scene, tile_x, tile_y, troop_type, troop_count, &attack_tile_validator, &dest_x, &dest_y)) { return; }
     entities_attack(scene, tile_x, tile_y, troop_type, troop_count, dest_x, dest_y);
     scene_focus_on_tile(scene, dest_x, dest_y);
-
-    char humans_won = 1;
-    for(size_t y = 0; y < scene->tiles_y && humans_won; y += 1) {
-        for(size_t x = 0; x < scene->tiles_x && humans_won; x += 1) {
-            SceneTileState* tile = scene_get_tile(scene, x, y);
-            if(tile->entities.size == 0) { continue; }
-            if(tile_state_get(tile, 0)->type->is_enemy) { humans_won = 0; }
-        }
-    }
-    if(humans_won) {
-        stage_end_screen(0, savegame, scene);
-    }
 });

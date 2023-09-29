@@ -43,7 +43,7 @@ void tile_state_remove(SceneTileState* tile, size_t index) {
 }
 
 
-Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander) {
+Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander, SceneUpdateHandler update_handler) {
     Scene new;
     new.stage_number = stage_number;
     new.tiles = tiles;
@@ -51,6 +51,7 @@ Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t til
     new.tiles_x = tiles_x;
     new.tiles_y = tiles_y;
     new.enemy_commander = enemy_commander;
+    new.update_handler = update_handler;
     new.objects = vector_new(sizeof(SceneObject));
     new.camera_ox = 0;
     new.camera_oy = 0;
@@ -214,4 +215,8 @@ char scenei_next(SceneIterator* scenei) {
         scenei->current_index += 1;
     }
     return 0;
+}
+
+void scenei_rewind(SceneIterator* scenei) {
+    scenei->current_index = 0;
 }

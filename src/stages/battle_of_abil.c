@@ -25,15 +25,18 @@ IMPL_STAGE(BATTLE_OF_ABIL, battle_of_abil, ((const SceneTile**[]) {
     (const SceneTile*[]) { DFST, FRST, VFLD, VPTB, FRST, VPTB, DFST },
     (const SceneTile*[]) { DFST, VHUT, VFLD, VPTR, VPLR, VPTL, DFST },
     (const SceneTile*[]) { DFST, DFST, DFST, DFST, DFST, DFST, DFST }
-}), 7, 7, FOG_DISABLED, COMMANDER_AGREG, {
+}), 7, 7, FOG_DISABLED, &COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 1, 3);
     stage_summon_troops(&self, 1, 3, &ENTITY_FARMER, 10);
     stage_summon_troops(&self, 6, 3, &ENTITY_GOBLIN, 10);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "The Battle of Abil",
     "You are a farmer living in Abil, a village at the border to the land of the goblins.\n"
     "The village is being attacked by the goblins during their invasion of the human realm.\n"
     "The farmers of Abil want to defend their homes no matter what, and you were chosen to be their leader.\n"
-    "Lead them to victory in their battle against the goblins.\n\n"
-    "Select a tile using [Up], [Down], [Left] and [Right].\n"
-    "Pressing [Enter] on a tile will allow you to select one of a few possible actions."
+    "Lead them to victory in their battle against the goblins."
 );

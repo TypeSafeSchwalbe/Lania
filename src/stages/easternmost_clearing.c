@@ -20,13 +20,18 @@ IMPL_STAGE(EASTERNMOST_CLEARING, easternmost_clearing, ((const SceneTile**[]) {
     (const SceneTile*[]) { DFST, MDOW, MDOW, MDOW, MDOW, MDOW, DFST },
     (const SceneTile*[]) { DFST, FRST, MDOW, MDOW, MDOW, FRST, DFST },
     (const SceneTile*[]) { DFST, DFST, DFST, DFST, DFST, DFST, DFST }
-}), 7, 7, FOG_DISABLED, COMMANDER_AGREG, {
+}), 7, 7, FOG_DISABLED, &COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 0, 3);
     stage_summon_troops(&self, 0, 3, &ENTITY_KNIGHT, 10);
     stage_summon_troops(&self, 5, 2, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 5, 3, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 5, 4, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 6, 3, &ENTITY_GOBLIN, 5);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Easternmost Clearing",
     "After the goblins' attack on Abil failed the kingdom of the humans\n"
     "is looking for more commanders for their counter-invasion,\n"

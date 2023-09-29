@@ -33,7 +33,7 @@ IMPL_STAGE(NARROW_RIVER_FORDS, narrow_river_fords, ((const SceneTile**[]) {
     (const SceneTile*[]) { MFST, MWTR, MWTR, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MFST, MFST },
     (const SceneTile*[]) { MWTR, MWTR, MWTR, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MMDW, MMDW, MMDW, MMDW, MFST, MFST, MFST },
     (const SceneTile*[]) { MWTR, MWTR, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST }
-}), 20, 20, FOG_ENABLED, COMMANDER_OBREG, {
+}), 20, 20, FOG_ENABLED, &COMMANDER_OBREG, {
     scene_focus_on_tile(&self, 1, 2);
 
     stage_summon_troops(&self, 1, 2, &ENTITY_ARCHER, 10);
@@ -57,6 +57,11 @@ IMPL_STAGE(NARROW_RIVER_FORDS, narrow_river_fords, ((const SceneTile**[]) {
     stage_summon_troops(&self, 15, 18, &ENTITY_GOBLIN, 20);
     stage_summon_troops(&self, 16, 18, &ENTITY_GOBLIN, 20);
 
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Narrow River Fords",
     "On your way through the enchanted forest you encounter a river.\n"
     "Although there is are fords to cross it, not many of your troops can do so\n"

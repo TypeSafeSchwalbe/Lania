@@ -37,7 +37,7 @@ IMPL_STAGE(ENCHANTED_LAKE, enchanted_lake, ((const SceneTile**[]) {
     (const SceneTile*[]) { MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MFST, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MFST, MFST, MFST },
     (const SceneTile*[]) { MMDW, MMDW, MMDW, MMDW, MFST, MFST, MFST, MFST, MFST, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MMDW, MFST, MFST, MFST },
     (const SceneTile*[]) { MMDW, MMDW, MMDW, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MFST, MMDW, MMDW, MMDW, MFST, MFST, MFST, MFST }
-}), 20, 20, FOG_ENABLED, COMMANDER_OBREG, {
+}), 20, 20, FOG_ENABLED, &COMMANDER_OBREG, {
     scene_focus_on_tile(&self, 1, 17);
 
     stage_summon_troops(&self, 1, 17, &ENTITY_SCOUT, 2);
@@ -58,6 +58,11 @@ IMPL_STAGE(ENCHANTED_LAKE, enchanted_lake, ((const SceneTile**[]) {
     stage_summon_troops(&self, 15, 16, &ENTITY_SPEAR_GOBLIN, 5);
     stage_summon_troops(&self, 14, 17, &ENTITY_CYCLOPS, 1);
     stage_summon_troops(&self, 15, 17, &ENTITY_GOBLIN, 10);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Enchanted Lake",
     "After you successfully took control of the disputed territory,\n"
     "you now entered the western side of the goblin realm."

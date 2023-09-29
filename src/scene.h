@@ -1,6 +1,7 @@
 
 #pragma once
 
+#include "savegame.h"
 #include "engine/vector.h"
 #include "engine/rendering.h"
 
@@ -61,12 +62,15 @@ typedef struct Commander {
 } Commander;
 
 
+typedef void (*SceneUpdateHandler)(Scene* scene, SaveGame* savegame, RenderBuffer* buffer);
+
 typedef struct Scene {
     const SceneTile*** tiles;
     SceneTileState* tile_states;
     size_t tiles_x;
     size_t tiles_y;
     unsigned char has_fog;
+    SceneUpdateHandler update_handler;
     const Commander* enemy_commander;
     Vector objects;
     signed int camera_ox;
@@ -76,8 +80,8 @@ typedef struct Scene {
     unsigned long stage_number;
 } Scene;
 
-typedef void (*RenderHandler)(void*, Scene*, RenderBuffer*);
-typedef void (*Deletehandler)(void*);
+typedef void (*RenderHandler)(void* data, Scene* scene, RenderBuffer* buffer);
+typedef void (*Deletehandler)(void* data);
 
 typedef struct SceneObjectType {
     RenderHandler render_h;
@@ -90,7 +94,7 @@ typedef struct SceneObject {
     void* data;
 } SceneObject;
 
-Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander);
+Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t tiles_x, size_t tiles_y, unsigned char has_fog, const Commander* enemy_commander, SceneUpdateHandler update_handler);
 
 void scene_focus_on_tile(Scene* scene, signed int tile_x, signed int tile_y);
 
@@ -121,3 +125,11 @@ typedef struct SceneIterator {
 SceneIterator scenei_new(Scene* scene, const SceneObjectType* type, size_t* output);
 
 char scenei_next(SceneIterator* scenei);
+
+void scenei_rewind(SceneIterator* scenei);
+
+#define SCENE_FOR_EACH_OBJECT(scene, object_type, index_var, action_body) { \
+        size_t index_var; \
+        SceneIterator iter = scenei_new(scene, object_type, &index_var); \
+        while(scenei_next(&iter)) action_body; \
+    }

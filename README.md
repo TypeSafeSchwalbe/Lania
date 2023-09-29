@@ -15,7 +15,7 @@
 - [x] Engine
 - [x] Game Logic
 - [ ] Game Content
-    - [ ] Tutorial
+    - [x] Tutorial
     - [x] Forest Region
     - [x] Desert Region
     - [x] Enchanted Forest Region

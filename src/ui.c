@@ -45,10 +45,12 @@ void select_stage(SaveGame* savegame, Scene* scene) {
     scene_free(scene);
     *scene = (STAGES[selected]->generator)(selected);
     
-    console_clear();
-    printf("\n%s\n\nContinue by pressing any key. ", STAGES[selected]->story);
-    fflush(stdout);
-    console_read_char();
+    if(STAGES[selected]->story != NULL) {
+        console_clear();
+        printf("\n%s\n\nContinue by pressing any key. ", STAGES[selected]->story);
+        fflush(stdout);
+        console_read_char();
+    }
 }
 
 

@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
@@ -7,38 +8,6 @@
 #include "engine/sequences.h"
 #include "stages/stages.h"
 
-
-void end_turn(SaveGame* savegame, Scene* scene) { 
-    char goblins_won = 0;
-    for(size_t y = 0; y < scene->tiles_y && !goblins_won; y += 1) {
-        for(size_t x = 0; x < scene->tiles_x && !goblins_won; x += 1) {
-            SceneTileState* tile = scene_get_tile(scene, x, y);
-            if(tile->entities.size == 0) { continue; }
-            if(!tile_state_get(tile, 0)->type->is_enemy) { continue; }
-            (scene->enemy_commander->tactic)(scene, x, y);
-
-            goblins_won = 1;
-            for(size_t y = 0; y < scene->tiles_y && goblins_won; y += 1) {
-                for(size_t x = 0; x < scene->tiles_x && goblins_won; x += 1) {
-                    SceneTileState* tile = scene_get_tile(scene, x, y);
-                    if(tile->entities.size == 0) { continue; }
-                    if(!tile_state_get(tile, 0)->type->is_enemy) { goblins_won = 0; }
-                }
-            }
-            if(goblins_won) {
-                stage_end_screen(1, savegame, scene);
-            }
-        }
-    }
-    for(size_t y = 0; y < scene->tiles_y; y += 1) {
-        for(size_t x = 0; x < scene->tiles_x; x += 1) {
-            SceneTileState* tile = scene_get_tile(scene, x, y);
-            for(size_t e = 0; e < tile->entities.size; e += 1) {
-                tile_state_get(tile, e)->did_action = 0;
-            }
-        }
-    }
-}
 
 const char* TURN_END_PROMPT = "Repeatedly press [T] to end your turn.";
 const unsigned char TURN_END_PRESS_COUNT = 3;
@@ -116,7 +85,7 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
         if(c == 't') {
             turn_end_press_count += 1;
             if(turn_end_press_count >= TURN_END_PRESS_COUNT) {
-                end_turn(savegame, scene);
+                (scene->update_handler)(scene, savegame, buffer);
                 turn_end_press_count = 0;
             }
         } else {

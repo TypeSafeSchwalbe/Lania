@@ -25,7 +25,7 @@ IMPL_STAGE(ABANDONED_RUBY_MINE, abandoned_ruby_mine, ((const SceneTile**[]) {
     (const SceneTile*[]) { DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT, DSRT },
     (const SceneTile*[]) { CLDR, DSRT, DSRT, DSRT, DSRT, CLDL, CLFF, CLFF, CLFF, CLFF, CLFF },
     (const SceneTile*[]) { CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF, CLFF }
-}), 11, 11, FOG_DISABLED, COMMANDER_DUREG, {
+}), 11, 11, FOG_DISABLED, &COMMANDER_DUREG, {
     scene_focus_on_tile(&self, 1, 1);
 
     stage_summon_troops(&self, 0, 1, &ENTITY_KNIGHT, 10);
@@ -55,6 +55,11 @@ IMPL_STAGE(ABANDONED_RUBY_MINE, abandoned_ruby_mine, ((const SceneTile**[]) {
     stage_summon_troops(&self, 10, 7, &ENTITY_GOBLIN, 10);
     stage_summon_troops(&self, 7, 8, &ENTITY_GOBLIN, 10);
     stage_summon_troops(&self, 9, 8, &ENTITY_GOBLIN, 10);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Abandoned Ruby Mine",
     "On the eastern end of the desert that is the disputed territory\n"
     "there is an old abandoned ruby mine that was once used by the humans.\n"

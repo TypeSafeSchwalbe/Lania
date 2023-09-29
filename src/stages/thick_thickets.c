@@ -24,7 +24,7 @@ IMPL_STAGE(THICK_THICKETS, thick_thickets, ((const SceneTile**[]) {
     (const SceneTile*[]) { VFLD, VFLD, VFLD, MDOW, DFST, MDOW, MDOW, MDOW, MDOW },
     (const SceneTile*[]) { MDOW, MDOW, MDOW, MDOW, DFST, MDOW, MDOW, MDOW, VPLR },
     (const SceneTile*[]) { VPLR, MDOW, MDOW, MDOW, DFST, MDOW, MDOW, MDOW, MDOW },
-}), 9, 9, FOG_DISABLED, COMMANDER_AGREG, {
+}), 9, 9, FOG_DISABLED, &COMMANDER_AGREG, {
     scene_focus_on_tile(&self, 4, 4);
     stage_summon_troops(&self, 0, 8, &ENTITY_KNIGHT, 5);
     stage_summon_troops(&self, 8, 7, &ENTITY_KNIGHT, 5);
@@ -33,6 +33,11 @@ IMPL_STAGE(THICK_THICKETS, thick_thickets, ((const SceneTile**[]) {
     stage_summon_troops(&self, 4, 0, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 5, 0, &ENTITY_GOBLIN, 5);
     stage_summon_troops(&self, 7, 0, &ENTITY_GOBLIN, 5);
+}, {
+    stage_win_if_only_humans(self, savegame);
+    stage_make_goblin_moves(self);
+    stage_lose_if_only_goblins(self, savegame);
+    stage_reset_troop_actions(self);
 }, "Thick Thickets",
     "The goblins were successfully pushed back to the border.\n"
     "You are assigned two groups of knights, coming from opposite direction.\n"
