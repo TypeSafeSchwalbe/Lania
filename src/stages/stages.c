@@ -60,7 +60,7 @@ void stage_reset_troop_actions(Scene* scene) {
 }
 
 
-const size_t STAGE_COUNT = 11;
+const size_t STAGE_COUNT = 12;
 
 const Stage* STAGES[] = {
     &STAGE_TUTORIAL_SELECTION,
@@ -77,5 +77,6 @@ const Stage* STAGES[] = {
     &STAGE_ELVEN_VILLAGE,
     &STAGE_NARROW_RIVER_FORDS,
 
-    &STAGE_WESTERN_OASIS
+    &STAGE_WESTERN_OASIS,
+    &STAGE_SEPARATED_SUBURBS
 };

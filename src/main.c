@@ -31,7 +31,6 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
         update_main_buffer_size(buffer);
         clear_buffer(buffer);
         scene_render(scene, buffer);
-        render_selected_tile(buffer, scene, scene->camera_tile_x, scene->camera_tile_y, S_WHITE_BG);
         for(size_t y = 0; y < scene->tiles_y; y += 1) {
             for(size_t x = 0; x < scene->tiles_x; x += 1) {
                 SceneTileState* tile = scene_get_tile(scene, x, y);
@@ -46,6 +45,7 @@ void gameloop(SaveGame* savegame, Scene* scene, RenderBuffer* buffer) {
                 render_selected_tile(buffer, scene, x, y, S_GREEN_BG);
             }
         }
+        render_selected_tile(buffer, scene, scene->camera_tile_x, scene->camera_tile_y, S_WHITE_BG);
         console_clear();
         print_buffer(buffer);
         render_turn_end_prompt(turn_end_press_count);

@@ -65,8 +65,8 @@ IMPL_ENTITY(SPEAR_GOBLIN, ((RenderObject) {
 
 IMPL_ENTITY(DAGGER_GOBLIN, ((RenderObject) {
     .data = (char**[]) {
-        (char*[]) { RF "o" C, NULL     },
-        (char*[]) { RF "#" C, RF "-" C }
+        (char*[]) { NULL    , RF "o" C },
+        (char*[]) { RF "-" C, RF "#" C }
     },
     .width = 2, .height = 2,
     .anchor_x = 0, .anchor_y = 1

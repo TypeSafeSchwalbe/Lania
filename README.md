@@ -22,5 +22,5 @@
     - [x] Enchanted Forest Region
     - [ ] Badlands
         - [x] Rework stage "Western Oasis"
-        - [ ] Suburban Defenses
+        - [x] Separated Suburbs
         - [ ] The Goblin Capital

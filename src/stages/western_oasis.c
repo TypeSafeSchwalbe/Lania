@@ -1,6 +1,4 @@
 
-#include <stdio.h>
-
 #include "stages.h"
 #include "content/nature.h"
 #include "content/humans.h"
