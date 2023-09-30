@@ -91,8 +91,8 @@ IMPL_ENTITY(CATAPULT, ((RenderObject) {
     2, // speed
     0, // is enemy
     25, // health
-    25, // attack strength
-    25, // attack size
+    5, // attack strength
+    20, // attack size
     3, // attack min distance
     20, // attack max distance
     1  // visibility distance
