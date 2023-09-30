@@ -23,7 +23,7 @@ void stage_win_if_only_humans(Scene* scene, SaveGame* savegame) {
             return;
         }
     }
-    stage_end_screen(0, savegame, scene);
+    stage_end_screen(S_GREEN_FG S_BOLD "\nGood job!\nAll goblin troops were defeated.\n" S_RESET, UNLOCK_NEXT_STAGE, savegame, scene);
 }
 
 void stage_make_goblin_moves(Scene* scene) {
@@ -45,7 +45,7 @@ void stage_lose_if_only_goblins(Scene* scene, SaveGame* savegame) {
             return;
         }
     }
-    stage_end_screen(1, savegame, scene);
+    stage_end_screen(S_RED_FG S_BOLD "\nGame over!\nYour troops were defeated.\n" S_RESET, NO_STAGE_UNLOCK, savegame, scene);
 }
 
 void stage_reset_troop_actions(Scene* scene) {
@@ -77,5 +77,5 @@ const Stage* STAGES[] = {
     &STAGE_ELVEN_VILLAGE,
     &STAGE_NARROW_RIVER_FORDS,
 
-    &STAGE_REMOTE_OASIS
+    &STAGE_WESTERN_OASIS
 };

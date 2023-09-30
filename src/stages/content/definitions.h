@@ -39,13 +39,13 @@
     extern const SceneTile SCENE_TILE_##tile_name;
 
 #define IMPL_TILE(tile_name, tile_name_lower, generator_body, capacity_number) \
-    void scene_tile_##tile_name_lower##generator(Scene* scene, size_t tile_x, size_t tile_y) { \
+    void scene_tile_##tile_name_lower##_generator(Scene* scene, size_t tile_x, size_t tile_y) { \
         unsigned int pos_x = SCENE_TILE_WIDTH * tile_x; \
         unsigned int pos_y = SCENE_TILE_HEIGHT * tile_y; \
         generator_body; \
     }; \
     const SceneTile SCENE_TILE_##tile_name = { \
-        .generator = &scene_tile_##tile_name_lower##generator, \
+        .generator = &scene_tile_##tile_name_lower##_generator, \
         .capacity = capacity_number \
     };
 

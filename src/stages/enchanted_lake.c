@@ -65,5 +65,7 @@ IMPL_STAGE(ENCHANTED_LAKE, enchanted_lake, ((const SceneTile**[]) {
     stage_reset_troop_actions(self);
 }, "Enchanted Lake",
     "After you successfully took control of the disputed territory,\n"
-    "you now entered the western side of the goblin realm."
+    "you now entered the western side of the goblin realm.\n"
+    "\n"
+    "(A deep fog fills this stage. Scouts can see far into the fog.)"
 );

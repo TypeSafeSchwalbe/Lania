@@ -58,11 +58,14 @@ Scene scene_new(unsigned long stage_number, const SceneTile*** tiles, size_t til
     new.has_fog = has_fog;
     for(size_t y = 0; y < new.tiles_y; y += 1) {
         for(size_t x = 0; x < new.tiles_x; x += 1) {
-            const SceneTile* tile = new.tiles[y][x];
-            (tile->generator)(&new, x, y);
             new.tile_states[y * new.tiles_x + x] = (SceneTileState) {
                 .entities = vector_new(sizeof(Entity))
             };
+        }
+    }
+    for(size_t y = 0; y < new.tiles_y; y += 1) {
+        for(size_t x = 0; x < new.tiles_x; x += 1) {
+            (new.tiles[y][x]->generator)(&new, x, y);
         }
     }
     return new;
@@ -210,6 +213,7 @@ char scenei_next(SceneIterator* scenei) {
         SceneObject* current = vector_get(&scenei->scene->objects, scenei->current_index);
         if(current->type == scenei->type) {
             *scenei->output = scenei->current_index;
+            scenei->current_index += 1;
             return 1;
         }
         scenei->current_index += 1;

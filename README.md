@@ -9,6 +9,7 @@
 ![Endless Desert](./screenshots/endless_desert.png)
 ![Enchanted Lake](./screenshots/enchanted_lake.png)
 ![Narrow River Fords](./screenshots/narrow_river_fords.png)
+![Western Oasis](./screenshots/western_oasis.png)
 
 # Progress
 
@@ -20,6 +21,6 @@
     - [x] Desert Region
     - [x] Enchanted Forest Region
     - [ ] Badlands
-        - [ ] Rework stage "Remote Oasis"
+        - [x] Rework stage "Western Oasis"
         - [ ] Suburban Defenses
         - [ ] The Goblin Capital

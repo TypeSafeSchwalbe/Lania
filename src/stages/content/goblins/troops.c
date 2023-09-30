@@ -72,7 +72,7 @@ IMPL_ENTITY(DAGGER_GOBLIN, ((RenderObject) {
     .anchor_x = 0, .anchor_y = 1
 }), "Dagger Goblin",
     1, // size
-    255, // speed
+    5, // speed
     1, // is enemy
     1, // health
     2, // attack strength

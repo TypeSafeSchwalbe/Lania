@@ -54,18 +54,14 @@ void select_stage(SaveGame* savegame, Scene* scene) {
 }
 
 
-void stage_end_screen(char winning_faction_is_enemy, SaveGame* savegame, Scene* scene) {
+void stage_end_screen(const char* text, char unlock_next_stage, SaveGame* savegame, Scene* scene) {
     console_clear();
-    if(winning_faction_is_enemy) {
-        puts(S_RED_FG S_BOLD "\nGame over!\nYour troops were defeated.\n" S_RESET);
-    } else {
-        puts(S_GREEN_FG S_BOLD "\nGood job!\nAll goblin troops were eliminated.\n" S_RESET);
-        if(scene->stage_number >= savegame->unlocked_stages - 1) {
-            savegame->unlocked_stages += 1;
-            if(savegame->unlocked_stages > STAGE_COUNT) { savegame->unlocked_stages = STAGE_COUNT; }
-            else { printf("As a result, the stage '%s' was unlocked.\n\n", STAGES[savegame->unlocked_stages - 1]->name); }
-            store_savegame(savegame);
-        }
+    puts(text);
+    if(unlock_next_stage && scene->stage_number >= savegame->unlocked_stages - 1) {
+        savegame->unlocked_stages += 1;
+        if(savegame->unlocked_stages > STAGE_COUNT) { savegame->unlocked_stages = STAGE_COUNT; }
+        else { printf("As a result, the stage '%s' was unlocked.\n\n", STAGES[savegame->unlocked_stages - 1]->name); }
+        store_savegame(savegame);
     }
     printf("Press any key to continue. ");
     fflush(stdout);

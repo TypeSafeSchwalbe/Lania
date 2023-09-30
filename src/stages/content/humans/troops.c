@@ -87,7 +87,7 @@ IMPL_ENTITY(CATAPULT, ((RenderObject) {
     .width = 13, .height = 3,
     .anchor_x = 6, .anchor_y = 2
 }), "Catapult",
-    25, // size
+    20, // size
     2, // speed
     0, // is enemy
     25, // health

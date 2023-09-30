@@ -10,7 +10,10 @@
 void select_stage(SaveGame* savegame, Scene* scene);
 
 
-void stage_end_screen(char winning_faction_is_enemy, SaveGame* savegame, Scene* scene);
+#define NO_STAGE_UNLOCK 0
+#define UNLOCK_NEXT_STAGE 1
+
+void stage_end_screen(const char* text, char unlock_next_stage, SaveGame* savegame, Scene* scene);
 
 
 int expected_main_buffer_width();

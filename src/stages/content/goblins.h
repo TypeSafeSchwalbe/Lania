@@ -6,9 +6,14 @@
 
 // village_objects.c
 
+DEF_OBJECT_PROP(GOBLIN_HUT, GoblinHut, goblin_hut);
+DEF_OBJECT_PROP(GOBLIN_HUT_RUBBLE, GoblinHutRubble, goblin_hut_rubble);
+
 // village_tiles.c
 
-DEF_TILE(GOBLIN_ROAD);
+DEF_TILE(GOBLIN_HUT);
+
+DEF_ENTITY(GOBLIN_HUT);
 
 // troops.c
 

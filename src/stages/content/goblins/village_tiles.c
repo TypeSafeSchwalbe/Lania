@@ -12,10 +12,26 @@
 #define MAX(a, b) ((a) > (b)? (a) : (b))
 
 
-IMPL_TILE(GOBLIN_ROAD, goblin_road, {
-    for(int y = 0; y < (int) ceil((double) SCENE_TILE_HEIGHT / PATH_HEIGHT); y += 1) {
-        for(int x = 0; x < (int) ceil((double) SCENE_TILE_WIDTH / PATH_WIDTH); x += 1) {
-            scene_add_path(scene, pos_x + MIN(x * PATH_WIDTH, SCENE_TILE_WIDTH - PATH_WIDTH), pos_y + MIN(y * PATH_HEIGHT, SCENE_TILE_HEIGHT - PATH_HEIGHT));
-        }
-    }
-}, 50);
+IMPL_TILE(GOBLIN_HUT, goblin_hut, {
+    tile_state_add(scene_get_tile(scene, tile_x, tile_y), create_entity(&ENTITY_GOBLIN_HUT));
+    scene_add_goblin_hut(scene, pos_x + rand() % SCENE_TILE_WIDTH, pos_y + rand() % SCENE_TILE_HEIGHT);
+    scene_add_dead_tree(scene, pos_x + rand() % SCENE_TILE_WIDTH, pos_y + rand() % SCENE_TILE_HEIGHT);
+    scene_add_shrub(scene, pos_x + rand() % SCENE_TILE_WIDTH, pos_y + rand() % SCENE_TILE_HEIGHT);
+    if(rand() % 5 == 0) { scene_add_tumbleweed(scene, pos_x, pos_y); }
+}, 0);
+
+IMPL_ENTITY(GOBLIN_HUT, ((RenderObject) {
+    .data = (char**[]) { 0 },
+    .width = 0, .height = 0,
+    .anchor_x = 0, .anchor_y = 0
+}), "Goblin Hut",
+    0, // size
+    0, // speed
+    1, // is enemy
+    50, // health
+    0, // attack strength
+    0, // attack size
+    0, // attack min distance
+    0, // attack max distance
+    0  // visibility distance
+);
