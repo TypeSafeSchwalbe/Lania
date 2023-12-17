@@ -72,7 +72,7 @@ void print_buffer(RenderBuffer* b) {
         printed_buffer_c += 1;
     }
     printed_buffer[printed_buffer_length] = '\0';
-    printf(printed_buffer);
+    printf("%s", printed_buffer);
     free(printed_buffer);
 }
 
